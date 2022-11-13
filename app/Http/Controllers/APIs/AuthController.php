@@ -43,9 +43,9 @@ class AuthController extends Controller
             $acc->name = $data['name'];
             $acc->email = $data['email'];
             $acc->password = Hash::make($data['password']);
-            $acc->status = 1;
-            $acc->isAdmin = 0;
-            $acc->isManager = 0;
+            $acc->status = true;
+            $acc->isAdmin = false;
+            $acc->isManager = false;
             $acc->dateOfBirth = null;
             $acc->created_at = Carbon::now('Asia/Ho_Chi_Minh');
             $acc->updated_at = null;
@@ -75,7 +75,7 @@ class AuthController extends Controller
 
         if (!empty($account)) {
             if (Hash::check($data['password'], $account->password)) {
-                if ($account->status == 1) {
+                if ($account->status == true) {
                     Auth::login($account);
                     $tokenResult = $account->createToken('Personal Access Token');
                     $token = $tokenResult->accessToken;

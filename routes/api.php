@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\App\Http\Controllers\APIs\AuthController;
-use Illuminate\App\Http\Models\User;
+use App\Http\Controllers\APIs\AuthController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\APIs\NewsController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::POST('/login', [AuthController::class, 'login']);
 Route::POST('/register', [AuthController::class, 'register']);
+// Route::get('account/edit/{id}', [AccountController::class, 'edit']);
+Route::get('/news',  [NewsController::class, 'shownews']);

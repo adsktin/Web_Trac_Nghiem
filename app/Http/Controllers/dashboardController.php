@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Gate;
 
-class dashboardController extends Controller
+class DashboardController extends Controller
 {
     //
     public function showdashboard()
     {
+            return  view('pages.dashboard');
 
-        return  redirect()->route('dashboard');
     }
 }
