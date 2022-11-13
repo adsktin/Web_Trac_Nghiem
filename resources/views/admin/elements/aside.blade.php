@@ -58,21 +58,28 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-            <a href="{{ route('dashboard') }}" class="menu-link">
+            <a href="{{ route('admin.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Trang Chủ</div>
             </a>
         </li>
+
         <li class="menu-item">
-            <a href="{{ route('account') }}" class="menu-link">
+            <a href="{{ route('admin.listaccount') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-account"></i>
-                <div data-i18n="Analytics">Account</div>
+                <div data-i18n="Analytics">Quản Lý Tài Khoản</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="{{ route('listaccount') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-list-ul"></i>
-                <div data-i18n="Analytics">List Account</div>
+            <a href="{{ route('admin.question') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <div data-i18n="Analytics">Quản Lý Câu Hỏi</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('admin.news') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-news"></i>
+                <div data-i18n="Analytics">Quản Lý Tin Tức</div>
             </a>
         </li>
     </ul>
