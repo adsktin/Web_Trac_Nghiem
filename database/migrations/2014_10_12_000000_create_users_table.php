@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone_number')->nullable();
             $table->Date('dateOfBirth')->nullable();
+            $table->integer('totalscore');
             $table->boolean('isAdmin');
             $table->boolean('isManager');
             $table->boolean('status');

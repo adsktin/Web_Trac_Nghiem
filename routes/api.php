@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::POST('/login', [AuthController::class, 'login']);
 Route::POST('/register', [AuthController::class, 'register']);
-// Route::get('account/edit/{id}', [AccountController::class, 'edit']);
+Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/news',  [NewsController::class, 'shownews']);

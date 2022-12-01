@@ -10,10 +10,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
+use App\Models\Ranking;
+use Laravel\Sanctum\PersonalAccessToken;
+use DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class AuthController extends Controller
 {
-    //
     public function register(Request $request)
     {
         $validator = Validator::make(
@@ -25,8 +29,7 @@ class AuthController extends Controller
 
             ],
             [
-
-                'name.required' => 'Tên không được bỏ trống!',
+                'name.required' => 'Họ và Tên không được bỏ trống!',
                 'email.required' => 'Email không được bỏ trống!',
                 'email.email' => 'Email này không hợp lệ!',
                 'email.unique' => 'Email này đã được sử dụng ở một tài khoản khác!',
@@ -38,17 +41,30 @@ class AuthController extends Controller
             return response()->json(['message' => $validator->errors()->toArray()], 400);
         } else {
             $data = $request->all();
-            // dd($data);
+
             $acc = new User();
             $acc->name = $data['name'];
             $acc->email = $data['email'];
             $acc->password = Hash::make($data['password']);
-            $acc->status = true;
-            $acc->isAdmin = false;
-            $acc->isManager = false;
             $acc->dateOfBirth = null;
+            $acc->totalscore = 0;
+
+            $acc->status = 1;
+            $acc->isAdmin = 0;
+            $acc->isManager = 0;
             $acc->created_at = Carbon::now('Asia/Ho_Chi_Minh');
             $acc->updated_at = null;
+
+            $acc->save();
+            $files = Storage::files('app/public/assets/no-avatar.png');
+
+            Storage::copy('assets/no-avatar.jpg', 'accounts/' . $acc->id . '/avatar/no-avatar.jpg');
+            $file = Image::make(storage_path('app/public/assets/no-avatar.jpg'));
+            $file->resize(360, 360, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $file->save(storage_path('app/public/accounts/' . $acc->id . '/avatar/no-avatar.jpg'));
+            $acc->avatar = 'no-avatar.jpg';
             $acc->save();
             return response()->json(['msg' => 'Successful account registration!'], 200);
         }
@@ -71,39 +87,69 @@ class AuthController extends Controller
 
         $data = $request->all();
 
-        $account = User::WHERE('email', $data['email'])->first();
+        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1, 'isAdmin' => 0, 'isManager' => 0])) {
+            $user = User::where('email', $data['email'])->firstOrFail();
 
-        if (!empty($account)) {
-            if (Hash::check($data['password'], $account->password)) {
-                if ($account->status == true) {
-                    Auth::login($account);
-                    $tokenResult = $account->createToken('Personal Access Token');
-                    $token = $tokenResult->accessToken;
-                    $token->created_at =  Carbon::now('Asia/Ho_Chi_Minh');
-                    $token->last_used_at = Carbon::now('Asia/Ho_Chi_Minh')->addWeeks(1);
-                    $token->save();
-                    return response()->json([
-                        'status' => 200,
-                        'user' => [
-                            'access_token' => $tokenResult->accessToken->token,
-                            'id' => Auth::user()->id,
-                            'avatar' => Auth::user()->avatar,
-                            'name' => Auth::user()->name,
-                            'email' => Auth::user()->email,
-                            'password' => Auth::user()->password,
-                            'phone_number' => Auth::user()->phone_number,
-                            'date_of_birth' => Auth::user()->dateOfBirth,
-                            'status' => Auth::user()->status,
-                        ],
-                    ]);
-                } else {
-                    return response()->json(['status' => 400, 'error' => 'Tài khoản bị khóa hoặc chưa kích hoạt.']);
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+            ], 200);
+        } else {
+            return response()->json(['error' => 'Tài khoản này không tồn tại'], 400);
+        }
+    }
+    public function getUser(Request $request)
+    {
+        // $ranking_single = DB::select('SELECT *,
+        // DENSE_RANK() OVER (ORDER BY score_single DESC) dens_rank
+        // FROM ranking;');
+
+        // $ranking_challenge = DB::select('SELECT *,
+        // DENSE_RANK() OVER (ORDER BY score_challenge DESC) dens_rank
+        // FROM ranking;');
+        // foreach ($ranking_single as $rank) {
+        //     if ($rank->user_id == $request->user()->id) {
+        //         $ranking_single = $rank->dens_rank;
+        //     }
+        // }
+        // foreach ($ranking_challenge as $rank) {
+        //     if ($rank->user_id == $request->user()->id) {
+        //         $ranking_challenge = $rank->dens_rank;
+        //     }
+        // }
+        return response()->json([
+            'id' => $request->user()->id,
+            'name' => $request->user()->name,
+            'avatar' => URL('storage/account/' . $request->user()->id . '/avatar/' . $request->user()->avatar),
+            'email' => $request->user()->email,
+            'phone_number' => $request->user()->phone_number,
+            'dateOfBirth' => date('d-m-Y', strtotime($request->user()->dateOfBirth)),
+            'totalscore' => $request->user()->totalscore,
+        ], 200);
+    }
+    public function changePassword(Request $request)
+    {
+        $data = $request->all();
+        $user = $request->user();
+        if (empty($user)) {
+            return response()->json('Có lỗi xảy ra!', 400);
+        } else {
+            if (Hash::check($data['old_password'], $user->password)) {
+                if ($data['new_password'] == $data['confirm_new_password']) {
+                    $update = User::where('id', $user->id)->update(['password' => Hash::make($data['new_password']), 'updated_at' => Carbon::now('Asia/Ho_Chi_Minh')]);
                 }
             } else {
-                return response()->json(['status' => 400, 'error' => 'Mật khẩu không chính xác.']);
+                return response()->json('Mật khẩu không khớp!', 400);
             }
-        } else {
-            return response()->json(['status' => 400, 'user' => 'Tài khoản này không tồn tại']);
+            return response()->json(['message' => 'Đổi mật khẩu thành công!'], 200);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->user()->token->delete();
+        return response()->json(['message' => 'Đăng xuất thành công!'], 200);
     }
 }

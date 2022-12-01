@@ -26,6 +26,8 @@
                     <form id="formCreateNews" action="{{ route('edit-question') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" id="edit-id-question" name="id" value="{{ $questions->id }}">
+                        {{--  <input type="hidden" id="edit-id-type" name="type" value="{{ $questions->types->id }}">  --}}
                         <div class="row">
                             <div class="col-md-3">
                                 <label class="form-label" for="selectType">Thể Loại</label>
@@ -62,7 +64,14 @@
                                     </div>
                                 @endif
                             </div>
-
+                            <input type="hidden" id="edit-id-answer1" name="answer1"
+                                value="{{ $questions->answers[0]->id }}">
+                            <input type="hidden" id="edit-id-answer2" name="answer2"
+                                value="{{ $questions->answers[1]->id }}">
+                            <input type="hidden" id="edit-id-answer3" name="answer3"
+                                value="{{ $questions->answers[2]->id }}">
+                            <input type="hidden" id="edit-id-answer4" name="answer4"
+                                value="{{ $questions->answers[3]->id }}">
                             <div class="mb-3 col-md-3">
                                 <label for="answer1" class="form-label">Câu Trả Lời Đúng</label>
                                 <input class="form-control" type="text" id="answer1" name="answer1"

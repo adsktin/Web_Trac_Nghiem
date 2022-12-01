@@ -16,10 +16,11 @@ class NewsController extends Controller
     public function shownews()
     {
         $i = News::all()->count();
+        $count = News::count();
         $news = News::all()->sortByDesc('id');
-        return  view('pages.news.shownews', compact('i', 'news'));
+        return  view('pages.news.shownews', compact('i', 'news', 'count'));
     }
-   
+
     public function showcreate()
     {
         return  view('pages.news.create-news');

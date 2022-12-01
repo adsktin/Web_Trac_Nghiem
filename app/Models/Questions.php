@@ -31,6 +31,6 @@ class Questions extends Model
     }
     public function types()
     {
-        return  $this->belongsTo(Types::class, 'id');
+        return  $this->belongsTo(Types::class, 'type_id', 'id');
     }
 }

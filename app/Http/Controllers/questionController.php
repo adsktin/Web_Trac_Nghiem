@@ -15,10 +15,11 @@ class QuestionController extends Controller
     public function showquestion()
     {
         $i = 0;
+        $count = Questions::count();
         $questions = Questions::all();
         $answers = Answers::all();
         $types = Types::all();
-        return  view('pages.question.showquestion', compact('i', 'types', 'questions', 'answers'));
+        return  view('pages.question.showquestion', compact('i', 'types', 'questions', 'answers', 'count'));
     }
     //create question
     public function showcreate()
@@ -118,38 +119,23 @@ class QuestionController extends Controller
 
 
         $data = $request->all();
-        $questions = new Questions();
+        $questions = Questions::WHERE('id', $request->id)->first();
         $questions->type_id = $data['type'];
         $questions->questcontent = $data['questcontent'];
-        //
-        $questions->status = true;
-        $questions->created_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $questions->updated_at = null;
         $questions->save();
-        // create answer1
-        $answer1 = new Answers();
-        $answer1->question_id = $questions->id;
+        //$questions->status = true;
+        //$questions->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $questions->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
+
+        $answer1 = Answers::where('id', $questions->answers[0]->id)->first();
         $answer1->answercontent = $data['answer1'];
-        $answer1->answerbool = true;
-        $answer1->status = true;
-        // create answer2
-        $answer2 = new Answers();
-        $answer2->question_id = $questions->id;
+        $answer2 = Answers::where('id', $questions->answers[1]->id)->first();
         $answer2->answercontent = $data['answer2'];
-        $answer2->answerbool = false;
-        $answer2->status = true;
-        // create answer3
-        $answer3 = new Answers();
-        $answer3->question_id = $questions->id;
+        $answer3 = Answers::where('id', $questions->answers[2]->id)->first();
         $answer3->answercontent = $data['answer3'];
-        $answer3->answerbool = false;
-        $answer3->status = true;
-        // create answer4
-        $answer4 = new Answers();
-        $answer4->question_id = $questions->id;
+        $answer4 = Answers::where('id', $questions->answers[3]->id)->first();
         $answer4->answercontent = $data['answer4'];
-        $answer4->answerbool = false;
-        $answer4->status = true;
         $answer1->save();
         $answer2->save();
         $answer3->save();
@@ -160,7 +146,7 @@ class QuestionController extends Controller
     public function delete(Request $request)
     {
         Questions::find($request->id)->delete();
-        return redirect()->route('showquestion-question')->with('success_delete', 'Xóa câu hỏi thành công!');
+        return redirect()->route('show-question')->with('success_delete', 'Xóa câu hỏi thành công!');
     }
 
     // type question

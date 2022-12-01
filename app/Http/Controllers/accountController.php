@@ -71,6 +71,7 @@ class AccountController extends Controller
             $acc->isAdmin = false;
             $acc->isManager = true;
         }
+        $acc->totalscore = 0;
         $acc->status = true;
         //$acc->dateOfBirth = $data['date_of_birth'];
         $acc->created_at = Carbon::now('Asia/Ho_Chi_Minh');
@@ -79,20 +80,6 @@ class AccountController extends Controller
 
 
         $acc->save();
-        //test1 - pass
-        // if ($request->hasFile('avatar')) {
-        //     $file = $request->file('avatar');
-        //     $Extentsion = $request->file('avatar')->getClientOriginalExtension();
-        //     $fileName = time() . '.' . $Extentsion;
-        //     $request->file('avatar')->storeAs('accounts/', $fileName);
-        //     $file = Image::make(storage_path('app/public/accounts/' . $fileName));
-        //     $file->resize(360, 360, function ($constraint) {
-        //         $constraint->aspectRatio();
-        //     });
-        //     $file->save(storage_path('app/public/accounts/' . $fileName));
-        //     $acc->avatar = $fileName;
-        // }
-        //test 2 - pass
         if ($request->hasFile('avatar')) {
 
             $file = $request->file('avatar');
@@ -115,11 +102,6 @@ class AccountController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        // $dataResponse = [
-        //     'status' =>200,
-        //     'data'  => $user
-        // ];
-        // return ($dataResponse);
         return view('pages.account.edit-account', compact('user'));
     }
     public function update(Request $request)
@@ -157,16 +139,7 @@ class AccountController extends Controller
             $acc->dateOfBirth = $data['dateOfBirth'];
             //$acc->created_at = Carbon::now('Asia/Ho_Chi_Minh');
             $acc->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-            // avatar
-            // if ($request->hasfile('avatar')) {
-            //     $file = $request->file('avatar');
-            //     $extenstion = $file->getClientOriginalExtension();
-            //     $filename =  $acc->id . time() . '.' . $extenstion;
-            //     $file->move(public_path('assets/img/accounts/'), $filename);
-            //     $acc->avatar = $filename;
-            // }
 
-            // test 2
             if ($request->hasFile('avatar')) {
 
                 $file = $request->file('avatar');
@@ -184,20 +157,6 @@ class AccountController extends Controller
             return redirect()->back()
                 ->with('success', 'Cập nhật thành công!');
         }
-
-        //Cập nhật ảnh đại diện
-        // if ($request->hasFile('avatar')) {
-        //     $fileExtentsion = $request->file('avatar')->getClientOriginalExtension();
-        //     $fileName = time() . '.' . $fileExtentsion;
-        //     $request->file('avatar')->storeAs('account/' . $acc->id . '/avatar/', $fileName);
-        //     $file = Image::make(storage_path('app/public/account/' . $acc->id . '/avatar/' . $fileName));
-        //     $file->resize(100, 100, function ($constraint) {
-        //         $constraint->aspectRatio();
-        //     });
-        //     $file->save(storage_path('app/public/account/' . $acc->id . '/avatar/' . $fileName));
-        //     $acc->avatar = $fileName;
-        // }
-
     }
 
     public function delete(Request $request)

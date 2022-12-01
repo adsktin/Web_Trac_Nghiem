@@ -63,13 +63,14 @@
                 <div data-i18n="Analytics">Trang Chủ</div>
             </a>
         </li>
-
-        <li class="menu-item {{ Request::is('*account*') ? 'active' : '' }}">
-            <a href="{{ route('show-account') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-user-account"></i>
-                <div data-i18n="Analytics">Quản Lý Tài Khoản</div>
-            </a>
-        </li>
+        @if (Auth::user()->isAdmin == true)
+            <li class="menu-item {{ Request::is('*account*') ? 'active' : '' }}">
+                <a href="{{ route('show-account') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-user-account"></i>
+                    <div data-i18n="Analytics">Quản Lý Tài Khoản</div>
+                </a>
+            </li>
+        @endif
         <li class="menu-item {{ Request::is('*question*') ? 'active' : '' }}">
             <a href="{{ route('show-question') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-question-mark"></i>

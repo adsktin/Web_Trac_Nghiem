@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
         'dateOfBirth',
         'email_verified_at',
+        'totalscore',
         'token',
         'isAdmin',
         'isManager',
