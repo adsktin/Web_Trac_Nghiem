@@ -73,7 +73,7 @@
         @endif
         <li class="menu-item {{ Request::is('*question*') ? 'active' : '' }}">
             <a href="{{ route('show-question') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <i class="menu-icon tf-icons bx bx-brain"></i>
                 <div data-i18n="Analytics">Quản Lý Câu Hỏi</div>
             </a>
         </li>

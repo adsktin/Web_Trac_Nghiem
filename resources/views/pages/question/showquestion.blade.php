@@ -19,7 +19,7 @@
             {{-- <h5 class="card-header">Responsive Table</h5> --}}
             <h5 class="card-header">Danh Sách Câu Hỏi</h5>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="table-question">
 
                     <thead>
                         <tr class="text-nowrap">
@@ -33,10 +33,7 @@
                             <th></th>
                         </tr>
                     </thead>
-
-
                     <tbody>
-
                         @foreach ($questions as $question)
                             <tr>
                                 <th scope="row">{{ ++$i }}</th>
@@ -79,4 +76,39 @@
             </div>
         </div>
     @endif
+    <script>
+        let table = new DataTable('#table-question', {
+            // options
+            paging: true, //phan trang
+            scrollY: 500,
+            info: true,
+            retrieve: true,
+            "bDestroy": true,
+            "pageLength": 10,
+            "language": {
+                "sProcessing": "Đang tải dữ liệu...",
+                "sLengthMenu": "Hiển thị _MENU_ trong danh sách",
+                "sZeroRecords": "Không có kết quả nào được tìm thấy",
+                "sEmptyTable": "Không có dữ liệu trong bảng này",
+                "sInfo": "Hiện đang ở vị trí _START_ đến _END_ trong tổng số _TOTAL_ của danh sách",
+                "sInfoEmpty": "Hiển thị các bản ghi từ 0 đến 0 trong tổng số 0 bản ghi",
+                "sInfoFiltered": "(lọc từ tổng số _MAX_ trong danh sách)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm kiếm:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Đang xử lý...",
+                "oPaginate": {
+                    "sFirst": "Trang đầu",
+                    "sLast": "Trang cuối",
+                    "sNext": ">",
+                    "sPrevious": "<"
+                },
+                "oAria": {
+                    "sSortAscending": ": Kích hoạt để sắp xếp cột theo thứ tự tăng dần",
+                    "sSortDescending": ": Kích hoạt để sắp xếp cột theo thứ tự giảm dần"
+                }
+            }
+        });
+    </script>
 @stop

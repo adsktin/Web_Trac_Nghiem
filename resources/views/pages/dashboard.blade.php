@@ -30,54 +30,10 @@
         <div class="col-lg-4 col-md-4 order-1">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title d-flex align-items-start justify-content-between">
-                                <div class="avatar flex-shrink-0">
-                                    <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card"
-                                        class="rounded">
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <span>Sales</span>
-                            <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                    </div>
+                    @include('dashboard-component.card-question')
                 </div>
                 <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title d-flex align-items-start justify-content-between">
-                                <div class="avatar flex-shrink-0">
-                                    <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card"
-                                        class="rounded">
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <span>Sales</span>
-                            <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                    </div>
+                    @include('dashboard-component.card-news')
                 </div>
             </div>
         </div>
@@ -86,57 +42,43 @@
         <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
             <div class="card">
                 <h5 class="card-header">Bảng Xếp Hạng</h5>
-                <div class="table-responsive text-nowrap" style="height: 300px; overflow: auto;">
-                    <table class="table">
+                {{--  style="height: 300px; overflow: auto;"  --}}
+                <div class="table-responsive text-nowrap">
+                    <table class="table" id="table-rank">
                         <thead>
                             <tr>
                                 <th>Hạng</th>
                                 <th>Avatar</th>
+                                <th>Email</th>
                                 <th>Họ và tên</th>
                                 <th>Điểm số</th>
                                 {{--  <th>Số trận thắng bạn bè</th>  --}}
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle"
-                                        width="50" height="50">
-                                </td>
-                                <td> <strong>Dương Nghĩa Hiệp</strong> </td>
-                                <td><strong>200</strong> điểm</td>
-                                {{--  <td>
-                                    <strong>200</strong> trận
-                                </td>  --}}
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle"
-                                        width="50" height="50">
-                                </td>
-                                <td> <strong>Dương Nghĩa Hiệp</strong> </td>
-                                <td><strong>200</strong> điểm</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle"
-                                        width="50" height="50">
-                                </td>
-                                <td> <strong>Dương Nghĩa Hiệp</strong> </td>
-                                <td><strong>200</strong> điểm</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle"
-                                        width="50" height="50">
-                                </td>
-                                <td> <strong>Dương Nghĩa Hiệp</strong> </td>
-                                <td><strong>200</strong> điểm</td>
-                            </tr>
+                            @foreach ($users as $user)
+                                @if ($user->isManager == false && $user->isAdmin == false)
+                                    <tr>
+                                        <td>{{ ++$i }}</td>
+                                        <td>
+                                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+
+                                                @if ($user->avatar == null)
+                                                    <img src="../assets/img/no-image/no-image-user.jpg" alt="Avatar"
+                                                        class="rounded-circle" height="50" />
+                                                @else
+                                                    <img src="../storage/accounts/{{ $user->id }}/avatar/{{ $user->avatar }}"
+                                                        alt="Avatar" class="rounded-circle" height="50"
+                                                        width="50" />
+                                                @endif
+                                            </ul>
+                                        </td>
+                                        <td> <strong>{{ $user->email }}</strong> </td>
+                                        <td> <strong>{{ $user->name }}</strong> </td>
+                                        <td><strong>{{ $user->totalscore }}</strong></td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -174,8 +116,7 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
-                                    <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
-                                        class="rounded">
+                                    <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded">
                                 </div>
                                 <div class="dropdown">
                                     <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown"
@@ -195,7 +136,7 @@
                     </div>
                 </div>
                 <!-- </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="row"> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="row"> -->
                 <div class="col-12 mb-4">
                     <div class="card">
                         <div class="card-body">
@@ -397,5 +338,37 @@
             </div>
         </div>
     </div>
-
+    <script>
+        let table = new DataTable('#table-rank', {
+            // options
+            paging: true, //phan trang
+            scrollY: 300,
+            info: true,
+            retrieve: true,
+            searching: false,
+            "bDestroy": true,
+            "pageLength": 10,
+            "language": {
+                "sProcessing": "Đang tải dữ liệu...",
+                "sLengthMenu": "Hiển thị _MENU_ trong danh sách",
+                "sEmptyTable": "Không có dữ liệu trong bảng này",
+                "sInfo": "Hiện đang ở vị trí _START_ đến _END_ trong tổng số _TOTAL_ của danh sách",
+                "sInfoEmpty": "Hiển thị các bản ghi từ 0 đến 0 trong tổng số 0 bản ghi",
+                "sInfoFiltered": "(lọc từ tổng số _MAX_ trong danh sách)",
+                "sInfoPostFix": "",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "Trang đầu",
+                    "sLast": "Trang cuối",
+                    "sNext": ">",
+                    "sPrevious": "<"
+                },
+                "oAria": {
+                    "sSortAscending": ": Kích hoạt để sắp xếp cột theo thứ tự tăng dần",
+                    "sSortDescending": ": Kích hoạt để sắp xếp cột theo thứ tự giảm dần"
+                }
+            }
+        });
+    </script>
 @stop
