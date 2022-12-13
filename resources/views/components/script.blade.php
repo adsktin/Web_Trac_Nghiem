@@ -38,3 +38,23 @@
         }
     }
 </script>
+{{--  delete  --}}
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+                title: `Bạn có chắc là muốn xóa không?`,
+                text: "Nếu bạn xóa sẽ không thể phục hồi.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
+</script>

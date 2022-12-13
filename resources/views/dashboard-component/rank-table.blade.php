@@ -26,8 +26,7 @@
                                             class="rounded-circle" height="50" />
                                     @else
                                         <img src="../storage/accounts/{{ $user->id }}/avatar/{{ $user->avatar }}"
-                                            alt="Avatar" class="rounded-circle" height="50"
-                                            width="50" />
+                                            alt="Avatar" class="rounded-circle" height="50" width="50" />
                                     @endif
                                 </ul>
                             </td>
@@ -41,3 +40,36 @@
         </table>
     </div>
 </div>
+<script>
+    let table = new DataTable('#table-rank', {
+        // options
+        paging: true, //phan trang
+        scrollY: 250,
+        info: true,
+        retrieve: true,
+        searching: false,
+        "bDestroy": true,
+        "pageLength": 10,
+        "language": {
+            "sProcessing": "Đang tải dữ liệu...",
+            "sLengthMenu": "Hiển thị _MENU_ trong danh sách",
+            "sEmptyTable": "Không có dữ liệu trong bảng này",
+            "sInfo": "Hiện đang ở vị trí _START_ đến _END_ trong tổng số _TOTAL_ của danh sách",
+            "sInfoEmpty": "Hiển thị các bản ghi từ 0 đến 0 trong tổng số 0 bản ghi",
+            "sInfoFiltered": "(lọc từ tổng số _MAX_ trong danh sách)",
+            "sInfoPostFix": "",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "Trang đầu",
+                "sLast": "Trang cuối",
+                "sNext": ">",
+                "sPrevious": "<"
+            },
+            "oAria": {
+                "sSortAscending": ": Kích hoạt để sắp xếp cột theo thứ tự tăng dần",
+                "sSortDescending": ": Kích hoạt để sắp xếp cột theo thứ tự giảm dần"
+            }
+        }
+    });
+</script>

@@ -56,15 +56,16 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <form action="{{ route('delete-news', ['id' => $new->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
                                                 <a class="dropdown-item"
                                                     href="{{ route('edit-news', ['id' => $new->id]) }}"><i
                                                         class="bx bx-edit-alt me-1"></i>
                                                     Sửa</a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item"><i
+                                                <button class="dropdown-item show_confirm"><i
                                                         class="bx bx-trash me-1"></i>Xóa</button>
                                             </form>
+
                                             {{--  <a class="dropdown-item" href="{{ route('delete-news', ['id' => $new->id]) }}"><i
                                                 class="bx bx-trash me-1"></i>
                                             Xóa</a>  --}}
@@ -81,7 +82,6 @@
     <script>
         let table = new DataTable('#table-news', {
             // options
-
             paging: true, //phan trang
             scrollY: 500,
             info: true,

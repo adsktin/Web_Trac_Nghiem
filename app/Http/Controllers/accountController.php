@@ -111,12 +111,12 @@ class AccountController extends Controller
             $request,
             [
                 'name' => 'required',
-                'password' => 'required',
+                // 'password' => 'required',
                 'phone_number' => 'required',
             ],
             [
                 'name.required' => 'Tên không được bỏ trống!',
-                'password.required' => 'Mật khẩu không được bỏ trống!',
+                // 'password.required' => 'Mật khẩu không được bỏ trống!',
                 'phone_number.required' => 'Số điện thoại không được bỏ trống!',
             ]
         );
@@ -127,7 +127,7 @@ class AccountController extends Controller
         if (!empty($acc)) {
             $acc->name = $data['name'];
             $acc->phone_number = $data['phone_number'];
-            $acc->password = Hash::make($data['password']);
+            // $acc->password = Hash::make($data['password']);
             if ($data['position'] == 'admin') {
                 $acc->isAdmin = true;
                 $acc->isManager = false;
@@ -162,7 +162,7 @@ class AccountController extends Controller
     public function delete(Request $request)
     {
         User::find($request->id)->delete();
-        return redirect()->route('show-account')->with('success_delete', 'Xóa tài khoản thành công thành công!');
+        return redirect()->route('show-account')->with('success_delete', 'Xóa tài khoản thành công!');
     }
 
     public function changestatus(Request $request)

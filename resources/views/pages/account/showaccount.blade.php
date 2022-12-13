@@ -90,7 +90,9 @@
                                                 Sửa</a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="dropdown-item btn-danger"><i
+                                            {{--  <button type="submit" class="dropdown-item btn-danger"><i
+                                                    class="bx bx-trash me-1"></i>Xóa</button>  --}}
+                                            <button class="dropdown-item btn-danger show_confirm"><i
                                                     class="bx bx-trash me-1"></i>Xóa</button>
                                         </form>
 
@@ -101,13 +103,11 @@
                                             <input type="hidden" id="status" name="status"
                                                 value="{{ $user->status }}">
                                             @if ($user->status == true)
-                                                <button type="submit" class="dropdown-item btn btn-warning"
-                                                    name="changestatus" value="false"><i
-                                                        class="bx bx-lock me-1"></i>Khóa</button>
+                                                <button type="submit" class="dropdown-item btn-warning" name="changestatus"
+                                                    value="false"><i class="bx bx-lock me-1"></i>Khóa</button>
                                             @else
-                                                <button type="submit" class="dropdown-item btn btn-success"
-                                                    name="changestatus" value="true"><i
-                                                        class="bx bx-lock-open me-1"></i>Mở Khóa</button>
+                                                <button type="submit" class="dropdown-item btn-success" name="changestatus"
+                                                    value="true"><i class="bx bx-lock-open me-1"></i>Mở Khóa</button>
                                             @endif
                                         </form>
 

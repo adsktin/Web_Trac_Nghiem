@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIs\AuthController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\APIs\NewsController;
+use App\Http\Controllers\APIs\RankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::POST('/login', [AuthController::class, 'login']);
 Route::POST('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/news',  [NewsController::class, 'shownews']);
+Route::get('/ranks',  [RankController::class, 'showranks']);

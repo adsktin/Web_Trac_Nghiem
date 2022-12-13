@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\InfomationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,4 +67,11 @@ Route::middleware('checkadmin')->group(function () {
     Route::get('news/edit/{id}', [NewsController::class, 'edit'])->name('edit-news');
     Route::post('news/update', [NewsController::class, 'update'])->name('update-news');
     Route::delete('news/delete', [NewsController::class, 'delete'])->name('delete-news');
+
+    // change password
+    Route::get('/changePassword', [ChangePasswordController::class, 'ChangePassword'])->name('ChangePassword');
+    Route::post('/changePassword', [ChangePasswordController::class, 'ChangePasswordSave'])->name('ChangePasswordSave');
+    // edit infomation
+    Route::get('/infomation', [InfomationController::class, 'infomation'])->name('infomation');
+    Route::post('/infomation', [InfomationController::class, 'update'])->name('update-infomation');
 });

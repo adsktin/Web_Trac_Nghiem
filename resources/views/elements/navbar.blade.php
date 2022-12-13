@@ -12,9 +12,10 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
+                {{--  <i class="bx bx-search fs-4 lh-0"></i>
                 <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                    aria-label="Search..." />
+                    aria-label="Search..." />  --}}
+
             </div>
         </div>
         <!-- /Search -->
@@ -39,10 +40,10 @@
                     <div class="avatar avatar-online">
                         @if (Auth::user()->avatar == null)
                             <img src="../assets/img/no-image/no-image-user.jpg" alt="Avatar" class="rounded-circle"
-                                height="50" />
+                                height="50" width="50" />
                         @else
                             <img src="../storage/accounts/{{ Auth::user()->id }}/avatar/{{ Auth::user()->avatar }}" alt
-                                class="w-px-40 h-auto rounded-circle" />
+                                class="w-px-40 rounded-circle" />
                         @endif
                     </div>
                 </a>
@@ -54,10 +55,10 @@
                                     <div class="avatar avatar-online">
                                         @if (Auth::user()->avatar == null)
                                             <img src="../assets/img/no-image/no-image-user.jpg" alt="Avatar"
-                                                class="rounded-circle" height="50" />
+                                                class="rounded-circle" height="50" width="50" />
                                         @else
                                             <img src="../storage/accounts/{{ Auth::user()->id }}/avatar/{{ Auth::user()->avatar }}"
-                                                alt class="w-px-40 h-auto rounded-circle" />
+                                                alt class="w-px-40 rounded-circle" />
                                         @endif
                                     </div>
                                 </div>
@@ -93,11 +94,14 @@
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>  --}}
-                        <button type="button" class="dropdown-item"data-bs-toggle="modal" data-bs-target="#changepass">
+                        {{--  <button type="button" class="dropdown-item"data-bs-toggle="modal" data-bs-target="#changepass">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">Đổi Mật Khẩu</span>
-                        </button>
-
+                        </button>  --}}
+                        <a class="dropdown-item" href="{{ route('ChangePassword') }}">
+                            <i class="bx bx-dots-horizontal me-2"></i>
+                            <span class="align-middle">Đổi Mật Khẩu</span>
+                        </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">

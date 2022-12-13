@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 //use Image;
 use Intervention\Image\Facades\Image;
+//
 
 class NewsController extends Controller
 {
@@ -126,6 +127,7 @@ class NewsController extends Controller
     public function delete(Request $request)
     {
         News::find($request->id)->delete();
+
         return redirect()->route('show-news')->with('success_delete', 'Xóa tin tức thành công!');
     }
 }

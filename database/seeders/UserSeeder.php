@@ -53,6 +53,10 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             'status' => true,
         ]);
+
+        //
+
+        $fake  = Factory::create();
         DB::table('users')->insert([
             'name' => 'Dương Nghĩa Hiệp',
             'avatar' => null,
@@ -69,8 +73,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             'status' => true,
         ]);
-        //
-        $fake  = Factory::create();
         $limit = 10;
         for ($i = 0; $i < $limit; $i++) {
             DB::table('users')->insert([
@@ -81,7 +83,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456'),
                 'dateOfBirth' => Carbon::now('Asia/Ho_Chi_Minh'),
                 'email_verified_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-                'totalscore' => $fake->numberBetween(10, 999),
+                'totalscore' => $fake->numberBetween(1, 999),
                 'isAdmin' => false,
                 'isManager' => false,
                 //'token' => null,

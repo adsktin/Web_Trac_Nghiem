@@ -122,8 +122,7 @@ class AuthController extends Controller
         return response()->json([
             'id' => $request->user()->id,
             'name' => $request->user()->name,
-            'avatar' => URL('storage/account/' . $request->user()->id . '/avatar/' . $request->user()->avatar),
-            'email' => $request->user()->email,
+            'avatar' => asset('storage/accounts/' + $request->user()->id + '/avatar/' + $request->user()->avatar),
             'phone_number' => $request->user()->phone_number,
             'dateOfBirth' => date('d-m-Y', strtotime($request->user()->dateOfBirth)),
             'totalscore' => $request->user()->totalscore,
@@ -149,7 +148,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->user()->token->delete();
+        $request->user()->token()->delete();
         return response()->json(['message' => 'Đăng xuất thành công!'], 200);
     }
 }

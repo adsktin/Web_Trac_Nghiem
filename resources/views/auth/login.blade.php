@@ -15,8 +15,8 @@
                     <div class="card-body">
                         <!-- Logo -->
                         <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
-                                <span class="app-brand-logo demo">
+                            <a href="{{ route('login') }}" class="app-brand-link gap-2">
+                                {{--  <span class="app-brand-logo demo">
                                     <svg width="25" viewBox="0 0 25 42" version="1.1"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <defs>
@@ -63,7 +63,19 @@
                                             </g>
                                         </g>
                                     </svg>
-                                </span>
+                                </span>  --}}
+                                <video class="styles_thumbnail___2I_B styles_video__td2wc" aria-label="Jet Admin"
+                                    width="64" height="64"
+                                    poster="https://ph-files.imgix.net/d3d11dd1-1678-4979-ad5b-98167e259c70.gif?auto=compress&amp;codec=mozjpeg&amp;cs=strip&amp;fm=webp&amp;w=64&amp;h=64&amp;fit=max&amp;frame=1&amp;dpr=2"
+                                    muted="" loop="" disableremoteplayback="" disablepictureinpicture=""
+                                    playsinline="" preload="none">
+                                    <source
+                                        src="https://ph-files.imgix.net/d3d11dd1-1678-4979-ad5b-98167e259c70.gif?fm=webm&amp;w=64&amp;h=64&amp;crop=max&amp;dpr=2#t=0.001"
+                                        type="video/webm">
+                                    <source
+                                        src="https://ph-files.imgix.net/d3d11dd1-1678-4979-ad5b-98167e259c70.gif?fm=mp4&amp;w=64&amp;h=64&amp;crop=max&amp;dpr=2#t=0.001"
+                                        type="video/mp4">
+                                </video>
                                 <span class="app-brand-text demo text-body fw-bolder">Brain</span>
                             </a>
                         </div>
@@ -103,12 +115,12 @@
                                     @endif
                                 </p>
                             </div>
-                            <div class="mb-3">
+                            {{--  <div class="mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="remember-me" />
                                     <label class="form-check-label" for="remember-me"> Ghi nhớ đăng nhập </label>
                                 </div>
-                            </div>
+                            </div>  --}}
                             <div class="mb-3">
                                 <button class="btn btn-primary d-grid w-100" type="submit">Đăng Nhập</button>
                             </div>

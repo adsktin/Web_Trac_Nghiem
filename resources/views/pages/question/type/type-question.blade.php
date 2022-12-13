@@ -2,6 +2,11 @@
 @section('title', 'Trắc Nghiệm - Admin | Thêm Thể Loại')
 @section('content')
 
+    @if (session('success_delete_type'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success_delete_type') }}
+        </div>
+    @endif
     @if (session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
@@ -104,8 +109,9 @@
                                                         Sửa</a>  --}}
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="dropdown-item"><i
+                                                    <button type="submit" class="dropdown-item show_confirm"><i
                                                             class="bx bx-trash me-1"></i>Xóa</button>
+
                                                 </form>
 
                                                 {{--  <a class="dropdown-item" href="{{ route('delete-news', ['id' => $new->id]) }}"><i

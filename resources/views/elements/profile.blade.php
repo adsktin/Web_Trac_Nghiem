@@ -74,9 +74,13 @@
                                     {{ Auth::user()->dateOfBirth }}
                                 @endif
                             </label>
-                            <label class="form-label" for="phoneNumber" style="font-size: 20px">
+                            <label class="form-label" for="phoneNumber" style="font-size: 21px">
                                 {{--  <strong>Số Điện Thoại: </strong>  --}}
-                                {{ Auth::user()->phone_number }}
+                                @if (Auth::user()->phone_number == null)
+                                    Chưa cập nhật
+                                @else
+                                    {{ Auth::user()->phone_number }}
+                                @endif
                             </label>
                             <br>
                             <label class="form-label" for="checkrole" style="font-size: 20px">
@@ -88,12 +92,15 @@
                     </div>
                 </form>
             </div>
-            {{--  <div class="modal-footer">
-                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            <div class="modal-footer">
+                {{--  <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Hủy
-                </button>
-                <button type="submit" class="btn btn-primary">Thêm</button>
-            </div>  --}}
+                </button>  --}}
+                {{--  <button type="submit" class="btn btn-primary">Thêm</button>  --}}
+                <a href="{{ route('infomation') }}"> <button type="button" class="btn btn-primary">Cập Nhật
+                        Mới</button></a>
+
+            </div>
         </div>
     </div>
 </div>

@@ -196,6 +196,6 @@ class QuestionController extends Controller
     public function deletetypes(Request $request)
     {
         Types::find($request->id)->delete();
-        return redirect()->route('createtype-question')->with('success_delete', 'Xóa thể loại thành công!');
+        return redirect()->route('createtype-question')->with('success_delete_type', 'Xóa thể loại thành công!');
     }
 }

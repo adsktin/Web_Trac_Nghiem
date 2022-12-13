@@ -1,7 +1,6 @@
 @extends('layout')
 @section('title', 'Trắc Nghiệm - Admin | Quản lý câu hỏi')
 @section('content')
-
     @if (session('success_delete'))
         <div class="alert alert-success" role="alert">
             {{ session('success_delete') }}
@@ -50,6 +49,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
+
                                             <form action="{{ route('delete-question', ['id' => $question->id]) }}"
                                                 method="POST">
                                                 <a class="dropdown-item"
@@ -58,7 +58,9 @@
                                                     Sửa</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="dropdown-item"><i
+                                                {{--  <button type="submit" class="dropdown-item"><i
+                                                        class="bx bx-trash me-1"></i>Xóa</button>  --}}
+                                                <button class="dropdown-item show_confirm"><i
                                                         class="bx bx-trash me-1"></i>Xóa</button>
                                             </form>
 
@@ -111,4 +113,5 @@
             }
         });
     </script>
+
 @stop

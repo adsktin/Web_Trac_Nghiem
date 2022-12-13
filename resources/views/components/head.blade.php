@@ -55,4 +55,6 @@
     <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.0.3/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.0.1/js/dataTables.select.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
