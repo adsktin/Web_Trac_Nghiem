@@ -7,6 +7,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\APIs\NewsController;
 use App\Http\Controllers\APIs\RankController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::POST('/login', [AuthController::class, 'login']);
 Route::POST('/register', [AuthController::class, 'register']);
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/news',  [NewsController::class, 'shownews']);
+Route::get('/news-detail/{id}',  [NewsController::class, 'getDetailNews']);
 Route::get('/ranks',  [RankController::class, 'showranks']);

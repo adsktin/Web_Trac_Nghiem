@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Ranking;
 use Laravel\Sanctum\PersonalAccessToken;
-use DB;
+// use DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -100,34 +100,32 @@ class AuthController extends Controller
             return response()->json(['error' => 'Tài khoản này không tồn tại'], 400);
         }
     }
-    public function getUser(Request $request)
-    {
-        // $ranking_single = DB::select('SELECT *,
-        // DENSE_RANK() OVER (ORDER BY score_single DESC) dens_rank
-        // FROM ranking;');
+    // public function getrankuser(Request $request)
+    // {
+    //     $ranks = User::all();
+    //     $ranks = DB::select('SELECT id,totalscore,status,
+    //     DENSE_RANK() OVER (ORDER BY totalscore DESC) dens_rank
+    //     FROM users where isAdmin = 0 && isManager = 0;');
 
-        // $ranking_challenge = DB::select('SELECT *,
-        // DENSE_RANK() OVER (ORDER BY score_challenge DESC) dens_rank
-        // FROM ranking;');
-        // foreach ($ranking_single as $rank) {
-        //     if ($rank->user_id == $request->user()->id) {
-        //         $ranking_single = $rank->dens_rank;
-        //     }
-        // }
-        // foreach ($ranking_challenge as $rank) {
-        //     if ($rank->user_id == $request->user()->id) {
-        //         $ranking_challenge = $rank->dens_rank;
-        //     }
-        // }
-        return response()->json([
-            'id' => $request->user()->id,
-            'name' => $request->user()->name,
-            'avatar' => asset('storage/accounts/' + $request->user()->id + '/avatar/' + $request->user()->avatar),
-            'phone_number' => $request->user()->phone_number,
-            'dateOfBirth' => date('d-m-Y', strtotime($request->user()->dateOfBirth)),
-            'totalscore' => $request->user()->totalscore,
-        ], 200);
-    }
+
+    //     // foreach ($ranks as $rank) {
+    //     //     if ($request->id == $rank->id) {
+    //     //         $ranking = $rank->dens_rank;
+    //     //     }
+    //     // }
+    //     return response()->json(
+    //         // [
+    //         //     'id' => $request->user()->id,
+    //         //     'name' => $request->user()->name,
+    //         //     'avatar' => asset('storage/accounts/' + $request->user()->id + '/avatar/' + $request->user()->avatar),
+    //         //     'phone_number' => $request->user()->phone_number,
+    //         //     'dateOfBirth' => date('d-m-Y', strtotime($request->user()->dateOfBirth)),
+    //         //     'totalscore' => $request->user()->totalscore,
+    //         // ],
+    //         $ranks,
+    //         200
+    //     );
+    // }
     public function changePassword(Request $request)
     {
         $data = $request->all();
@@ -148,7 +146,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->delete();
+        $request->user()->token->delete();
+        Auth::logout();
         return response()->json(['message' => 'Đăng xuất thành công!'], 200);
     }
 }

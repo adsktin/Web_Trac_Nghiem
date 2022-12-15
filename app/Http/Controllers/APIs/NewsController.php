@@ -18,4 +18,11 @@ class NewsController extends Controller
         }
         return response()->json($news, 200);
     }
+
+    public function getDetailNews($id)
+    {
+        $news = News::WHERE('id', $id)->first();
+        return response($news, 200)
+            ->header('Content-Type', 'application/json');
+    }
 }

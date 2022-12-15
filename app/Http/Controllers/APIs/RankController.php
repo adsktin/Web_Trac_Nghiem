@@ -12,7 +12,7 @@ class RankController extends Controller
 {
     public function showranks()
     {
-        $i = 0;
+        
         // $users = User::all();
         $ranks = DB::select('SELECT id,avatar,email,name,totalscore,status,
         DENSE_RANK() OVER (ORDER BY totalscore DESC) dens_rank
