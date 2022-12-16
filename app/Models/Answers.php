@@ -23,7 +23,7 @@ class Answers extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'answers';
-
+    protected $hidden = array('created_at', 'updated_at', 'deleted_at', 'status');
     public function questions()
     {
         return  $this->belongsTo(Question::class, 'id');

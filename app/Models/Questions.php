@@ -24,6 +24,7 @@ class Questions extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'questions';
+    protected $hidden = array('created_at', 'updated_at', 'deleted_at', 'status');
 
     public function answers()
     {

@@ -22,7 +22,7 @@ class Types extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'types';
-
+    protected $hidden = array('created_at', 'updated_at', 'deleted_at', 'status');
     public function questions()
     {
         return  $this->hasMany(Questions::class, 'type_id', 'id');

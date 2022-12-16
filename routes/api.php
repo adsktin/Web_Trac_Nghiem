@@ -6,6 +6,7 @@ use App\Http\Controllers\APIs\AuthController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\APIs\NewsController;
 use App\Http\Controllers\APIs\RankController;
+use App\Http\Controllers\APIs\QuestionController;
 
 
 /*
@@ -28,3 +29,5 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/news',  [NewsController::class, 'shownews']);
 Route::get('/news-detail/{id}',  [NewsController::class, 'getDetailNews']);
 Route::get('/ranks',  [RankController::class, 'showranks']);
+Route::get('/types',  [QuestionController::class, 'getTypeQuestion']);
+Route::post('/questions',  [QuestionController::class, 'randQuestion']);
