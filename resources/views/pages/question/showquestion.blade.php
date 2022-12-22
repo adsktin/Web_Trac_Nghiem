@@ -37,11 +37,28 @@
                             <tr>
                                 <th scope="row">{{ ++$i }}</th>
                                 <td>{{ $question->types->type }}</td>
-                                <td>{{ $question->questcontent }}</td>
-                                <td>{{ $question->answers[1]->answercontent }}</td>
-                                <td>{{ $question->answers[2]->answercontent }}</td>
-                                <td>{{ $question->answers[3]->answercontent }}</td>
-                                <td>{{ $question->answers[0]->answercontent }}</td>
+                                <td>
+                                    <div style="width: 200px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                        {{ $question->questcontent }}</div>
+                                </td>
+
+                                <td>
+                                    <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                        {{ $question->answers[1]->answercontent }}</div>
+
+                                </td>
+                                <td>
+                                    <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                        {{ $question->answers[2]->answercontent }}</div>
+                                </td>
+                                <td>
+                                    <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                        {{ $question->answers[3]->answercontent }}</div>
+                                </td>
+                                <td>
+                                    <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                        {{ $question->answers[0]->answercontent }}</div>
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -82,7 +99,7 @@
         let table = new DataTable('#table-question', {
             // options
             paging: true, //phan trang
-            scrollY: 500,
+
             info: true,
             retrieve: true,
             "bDestroy": true,

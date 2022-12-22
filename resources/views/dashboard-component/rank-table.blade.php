@@ -44,7 +44,7 @@
     let table = new DataTable('#table-rank', {
         // options
         paging: true, //phan trang
-        scrollY: 250,
+        scrollY: 400,
         info: true,
         retrieve: true,
         searching: false,

@@ -56,9 +56,9 @@ class AuthController extends Controller
             $acc->updated_at = null;
 
             $acc->save();
-            $files = Storage::files('app/public/assets/no-avatar.png');
+            $file = Storage::files('app/public/accounts/no-avatar.png');
 
-            Storage::copy('assets/no-avatar.jpg', 'accounts/' . $acc->id . '/avatar/no-avatar.jpg');
+            Storage::copy('app/public/accounts/no-avatar.jpg', 'accounts/' . $acc->id . '/avatar/no-avatar.jpg');
             $file = Image::make(storage_path('app/public/assets/no-avatar.jpg'));
             $file->resize(360, 360, function ($constraint) {
                 $constraint->aspectRatio();

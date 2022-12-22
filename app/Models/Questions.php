@@ -18,7 +18,6 @@ class Questions extends Model
     public $timestamps = true;
     protected $fillable = [
         'questcontent',
-        'score',
         'type_id',
         'status',
     ];

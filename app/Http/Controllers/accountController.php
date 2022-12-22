@@ -151,6 +151,7 @@ class AccountController extends Controller
                     $constraint->aspectRatio();
                 });
                 $file->save(storage_path('app/public/accounts/' . $acc->id . '/avatar/' . $fileName));
+
                 $acc->avatar = $fileName;
             }
             $acc->save();

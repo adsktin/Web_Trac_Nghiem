@@ -33,6 +33,7 @@
                         <th>STT</th>
                         <th>Avatar</th>
                         <th>Email</th>
+                        <th>Số điện thoại</th>
                         <th>Họ và Tên</th>
                         <th>Chức Vụ</th>
                         <th>Trạng Thái</th>
@@ -53,11 +54,15 @@
                                     @else
                                         <img src="../storage/accounts/{{ $user->id }}/avatar/{{ $user->avatar }}"
                                             alt="Avatar" class="rounded-circle" height="50" width="50" />
+                                        {{--  <img src="{{ $user->avatar }}" alt="Avatar" class="rounded-circle" height="50"
+                                            width="50" />  --}}
                                     @endif
                                 </ul>
                             </td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone_number }}</td>
                             <td>{{ $user->name }}</td>
+
                             <td>
                                 @if ($user->isAdmin == true)
                                     Admin

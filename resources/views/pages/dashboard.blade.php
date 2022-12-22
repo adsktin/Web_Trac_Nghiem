@@ -39,7 +39,7 @@
         </div>
         <!-- Total Revenue -->
 
-        <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+        <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
             @include('dashboard-component.rank-table')
         </div>
         <!--/ Total Revenue -->
