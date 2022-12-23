@@ -25,10 +25,14 @@
                             <th>STT</th>
                             <th>Thể Loại</th>
                             <th>Nội Dung</th>
-                            <th class="bg-danger text-white border">Đáp Án Sai</th>
-                            <th class="bg-danger text-white border">Đáp Án Sai</th>
-                            <th class="bg-danger text-white border">Đáp Án Sai</th>
-                            <th class="bg-success ">Đáp Án Đúng</th>
+                            <th class="bg-danger text-white border">Đáp Án sai</th>
+                            <th class="bg-danger text-white border">Đáp Án sai</th>
+                            <th class="bg-danger text-white border">Đáp Án sai</th>
+                            <th class="bg-success border">Đáp Án đúng</th>
+                            {{--  <th>Đáp Án A</th>
+                            <th>Đáp Án B</th>
+                            <th>Đáp Án C</th>
+                            <th>Đáp Án D</th>  --}}
                             <th></th>
                         </tr>
                     </thead>
@@ -43,19 +47,55 @@
                                 </td>
 
                                 <td>
+                                    {{--  @if ($question->answers[1]->answerbool == true)
+                                        <div class="bg-success"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[1]->answercontent }}</div>
+                                    @else
+                                        <div class="bg-danger text-white border"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[1]->answercontent }}</div>
+                                    @endif  --}}
                                     <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
                                         {{ $question->answers[1]->answercontent }}</div>
-
                                 </td>
+
                                 <td>
+                                    {{--  @if ($question->answers[2]->answerbool == true)
+                                        <div class="bg-success"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[2]->answercontent }}</div>
+                                    @else
+                                        <div class="bg-danger text-white border"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[2]->answercontent }}</div>
+                                    @endif  --}}
                                     <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
                                         {{ $question->answers[2]->answercontent }}</div>
                                 </td>
                                 <td>
+                                    {{--  @if ($question->answers[3]->answerbool == true)
+                                        <div class="bg-success"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[3]->answercontent }}</div>
+                                    @else
+                                        <div class="bg-danger text-white border"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[3]->answercontent }}</div>
+                                    @endif  --}}
                                     <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
                                         {{ $question->answers[3]->answercontent }}</div>
                                 </td>
                                 <td>
+                                    {{--  @if ($question->answers[0]->answerbool == true)
+                                        <div class="bg-success"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[0]->answercontent }}</div>
+                                    @else
+                                        <div class="bg-danger text-white border"
+                                            style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
+                                            {{ $question->answers[0]->answercontent }}</div>
+                                    @endif  --}}
                                     <div style="width: 150px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis">
                                         {{ $question->answers[0]->answercontent }}</div>
                                 </td>
