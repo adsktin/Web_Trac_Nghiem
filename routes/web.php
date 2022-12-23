@@ -20,9 +20,7 @@ use App\Http\Controllers\InfomationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LoginController::class, 'formlogin'])->name('formlogin');
 
 // Route::prefix('login')->group(function () {
 
